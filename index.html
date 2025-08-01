@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DONATO WEBPAGE</title>
+    <title>DONATO WEBPAGE - Professional Printing & Studio Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -46,7 +46,9 @@
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center space-x-4">
                     <!-- Main Logo -->
-                    <img src="C:\Users\Admin\Downloads/DONATO WEBPAGE.png" alt="Donato Webpage Logo" class="w-20 h-20 rounded-xl shadow-lg border-2 border-white object-contain bg-white">
+                    <div class="w-20 h-20 rounded-xl shadow-lg border-2 border-white bg-white flex items-center justify-center">
+                        <span class="text-purple-600 font-bold text-lg">DONATO</span>
+                    </div>
                     <div>
                         <h1 class="text-3xl md:text-5xl font-bold">DONATO WEBPAGE</h1>
                         <p class="text-lg opacity-90">Professional Services & Creative Solutions</p>
@@ -60,6 +62,12 @@
             
             <!-- Cart and Loyalty Card Buttons -->
             <div class="flex justify-end space-x-4">
+                <button onclick="showAppointmentBooking()" class="bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Book Appointment</span>
+                </button>
                 <button onclick="showLoyaltyRegistration()" class="bg-yellow-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-yellow-600 transition-colors duration-300 flex items-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-4 0V5a2 2 0 014 0"></path>
@@ -73,7 +81,6 @@
                     <span>View Cart</span>
                     <span id="cartCount" class="bg-red-500 text-white rounded-full px-2 py-1 text-xs cart-badge">0</span>
                 </button>
-
             </div>
         </div>
     </header>
@@ -1080,7 +1087,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p>&copy; 2025 Donato Webpage. All rights reserved.</p>
+                <p>&copy; 2024 Donato Webpage. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1166,7 +1173,276 @@
             showPaymentModal(total);
         }
 
+        function showAppointmentBooking() {
+            const appointmentModal = document.createElement('div');
+            appointmentModal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
+            appointmentModal.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-96 overflow-y-auto">
+                    <div class="p-6 border-b">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-2xl font-bold text-gray-800">Book an Appointment</h3>
+                            <button onclick="closeAppointmentModal()" class="text-gray-500 hover:text-gray-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Left Column - Service Selection -->
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4">Select Service</h4>
+                                <div class="space-y-3">
+                                    <div class="border-2 border-blue-200 rounded-lg p-3 hover:border-blue-400 cursor-pointer" onclick="selectService('printing')">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-semibold text-blue-700">Printing Services</h5>
+                                                <p class="text-sm text-gray-600">ID, Documents, Photos</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-2 border-purple-200 rounded-lg p-3 hover:border-purple-400 cursor-pointer" onclick="selectService('photography')">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-semibold text-purple-700">Photography</h5>
+                                                <p class="text-sm text-gray-600">Portrait, Event, Wedding</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-2 border-red-200 rounded-lg p-3 hover:border-red-400 cursor-pointer" onclick="selectService('video')">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-semibold text-red-700">Video Production</h5>
+                                                <p class="text-sm text-gray-600">Music Video, Commercial</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-2 border-green-200 rounded-lg p-3 hover:border-green-400 cursor-pointer" onclick="selectService('design')">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-semibold text-green-700">Design Services</h5>
+                                                <p class="text-sm text-gray-600">Logo, Brand Identity</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Right Column - Appointment Form -->
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4">Appointment Details</h4>
+                                <form id="appointmentForm" class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                                        <input type="text" id="appointmentName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Enter your full name">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                        <input type="tel" id="appointmentPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="09XXXXXXXXX">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                        <input type="email" id="appointmentEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="your.email@example.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date *</label>
+                                        <input type="date" id="appointmentDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time *</label>
+                                        <select id="appointmentTime" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                            <option value="">Select time</option>
+                                            <option value="08:00">8:00 AM</option>
+                                            <option value="09:00">9:00 AM</option>
+                                            <option value="10:00">10:00 AM</option>
+                                            <option value="11:00">11:00 AM</option>
+                                            <option value="13:00">1:00 PM</option>
+                                            <option value="14:00">2:00 PM</option>
+                                            <option value="15:00">3:00 PM</option>
+                                            <option value="16:00">4:00 PM</option>
+                                            <option value="17:00">5:00 PM</option>
+                                            <option value="18:00">6:00 PM</option>
+                                            <option value="19:00">7:00 PM</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Details</label>
+                                        <textarea id="appointmentDetails" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" rows="3" placeholder="Describe what you need (e.g., ID photos, wedding photography, logo design)"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <h5 class="font-semibold text-green-800 mb-2">📋 Appointment Guidelines:</h5>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li>• Appointments are confirmed within 24 hours</li>
+                                <li>• Please arrive 10 minutes before your scheduled time</li>
+                                <li>• Bring valid ID and any required documents</li>
+                                <li>• Cancellations must be made 24 hours in advance</li>
+                                <li>• Rush services may require additional fees</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-6 flex space-x-3">
+                            <button onclick="submitAppointmentToFacebook()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                <span>Submit to Facebook</span>
+                            </button>
+                            <button onclick="processAppointment()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold">
+                                Book Appointment
+                            </button>
+                            <button onclick="closeAppointmentModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-3 px-6 rounded-lg font-semibold">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(appointmentModal);
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = today;
+        }
+
+        function closeAppointmentModal() {
+            const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50.z-50');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function selectService(serviceType) {
+            // Remove previous selections
+            document.querySelectorAll('.border-4').forEach(el => {
+                el.classList.remove('border-4');
+                el.classList.add('border-2');
+            });
+            
+            // Add selection to clicked service
+            event.currentTarget.classList.remove('border-2');
+            event.currentTarget.classList.add('border-4');
+            
+            // Store selected service
+            window.selectedService = serviceType;
+        }
+
+        function processAppointment() {
+            const name = document.getElementById('appointmentName').value;
+            const phone = document.getElementById('appointmentPhone').value;
+            const email = document.getElementById('appointmentEmail').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const details = document.getElementById('appointmentDetails').value;
+
+            if (!name || !phone || !date || !time) {
+                alert('Please fill in all required fields (Name, Phone, Date, Time).');
+                return;
+            }
+
+            if (!window.selectedService) {
+                alert('Please select a service type.');
+                return;
+            }
+
+            const appointmentNumber = 'APT' + Date.now().toString().slice(-6);
+            
+            alert(`Appointment booked successfully!\n\nAppointment Number: ${appointmentNumber}\nDate: ${date}\nTime: ${time}\n\nWe will contact you within 24 hours to confirm your appointment. Please save your appointment number for reference.`);
+            
+            closeAppointmentModal();
+        }
+
+        function submitAppointmentToFacebook() {
+            const name = document.getElementById('appointmentName').value;
+            const phone = document.getElementById('appointmentPhone').value;
+            const email = document.getElementById('appointmentEmail').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const details = document.getElementById('appointmentDetails').value;
+
+            if (!name || !phone || !date || !time) {
+                alert('Please fill in all required fields before submitting to Facebook.');
+                return;
+            }
+
+            if (!window.selectedService) {
+                alert('Please select a service type.');
+                return;
+            }
+
+            const appointmentNumber = 'APT' + Date.now().toString().slice(-6);
+            const serviceNames = {
+                'printing': 'Printing Services',
+                'photography': 'Photography',
+                'video': 'Video Production',
+                'design': 'Design Services'
+            };
+
+            const message = `📅 APPOINTMENT BOOKING REQUEST
+
+📋 APPOINTMENT DETAILS:
+Appointment Number: ${appointmentNumber}
+Service Type: ${serviceNames[window.selectedService]}
+Date: ${date}
+Time: ${time}
+
+👤 CUSTOMER INFORMATION:
+Name: ${name}
+Phone: ${phone}
+Email: ${email || 'Not provided'}
+
+📝 SERVICE DETAILS:
+${details || 'No additional details provided'}
+
+📞 CONTACT INFORMATION:
+📱 Phone: 09931109148
+📧 Email: jmbalbuenastudioproduction@gmail.com
+📍 Location: Hi-way, Balitoc, Calatagan, Batangas
+
+⏰ BUSINESS HOURS:
+Monday to Sunday: 8:00 AM - 8:00 PM
+
+Please confirm this appointment and provide any additional requirements or pricing information.
+
+#JMBPrintingServices #Appointment #${serviceNames[window.selectedService].replace(' ', '')}`;
+
+            if (confirm(`Your appointment request will be sent to our Facebook page.\nAppointment Number: ${appointmentNumber}\nService: ${serviceNames[window.selectedService]}\nDate: ${date} at ${time}\n\nClick OK to continue to Facebook.`)) {
+                navigator.clipboard.writeText(message).then(() => {
+                    alert('Appointment details copied to clipboard! You can paste this message on our Facebook page.');
+                }).catch(() => {
+                    console.log('Clipboard API not available');
+                });
+                
+                const facebookUrl = `https://web.facebook.com/profile.php?id=`;
+                window.open(facebookUrl, '_blank');
+                closeAppointmentModal();
+            }
+        }
 
         function showLoyaltyRegistration() {
             const loyaltyModal = document.createElement('div');
@@ -1185,17 +1461,11 @@
                     </div>
                     <div class="p-6">
                         <div class="text-center mb-6">
-                            <!-- JMB Logo Placeholder -->
                             <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                                 <div class="text-center">
                                     <div class="text-white font-bold text-lg">JMB</div>
                                     <div class="text-white text-xs">PRINTING</div>
                                 </div>
-                            </div>
-                            <div class="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-4 0V5a2 2 0 014 0"></path>
-                                </svg>
                             </div>
                             <h4 class="text-xl font-bold text-gray-800 mb-2">Get Your Loyalty Card ID</h4>
                             <p class="text-gray-600">Enjoy exclusive discounts and rewards!</p>
@@ -1272,9 +1542,7 @@
                 return;
             }
 
-            // Generate a unique loyalty card number
             const cardNumber = 'JMB' + Date.now().toString().slice(-6);
-            
             showLoyaltyPaymentModal(name, phone, email, address, cardNumber);
         }
 
@@ -1306,7 +1574,6 @@
                         </div>
                         
                         <div class="space-y-4">
-                            <!-- GCash Payment -->
                             <div class="border-2 border-blue-200 rounded-lg p-4">
                                 <div class="flex items-center space-x-3 mb-3">
                                     <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -1322,7 +1589,6 @@
                                 </div>
                             </div>
 
-                            <!-- BPI Payment -->
                             <div class="border-2 border-red-200 rounded-lg p-4">
                                 <div class="flex items-center space-x-3 mb-3">
                                     <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
@@ -1377,10 +1643,8 @@
                 return;
             }
 
-            // Generate a unique loyalty card number
             const cardNumber = 'JMB' + Date.now().toString().slice(-6);
             
-            // Create the message to send to Facebook
             const message = `🆔 LOYALTY CARD REGISTRATION REQUEST
 
 📋 CUSTOMER DETAILS:
@@ -1401,26 +1665,18 @@ Please process this loyalty card registration. Customer will send payment receip
 
 #JMBPrintingServices #LoyaltyCard #Registration`;
 
-            // Show confirmation dialog
             if (confirm(`Your loyalty card registration details will be sent to our Facebook page. Card Number: ${cardNumber}\n\nClick OK to continue to Facebook.`)) {
-                // Copy message to clipboard for easy pasting
                 navigator.clipboard.writeText(message).then(() => {
                     alert('Registration details copied to clipboard! You can paste this message on our Facebook page.');
                 }).catch(() => {
-                    // Fallback if clipboard API is not available
                     console.log('Clipboard API not available');
                 });
                 
-                // Open Facebook page
                 const facebookUrl = `https://web.facebook.com/profile.php?id=`;
                 window.open(facebookUrl, '_blank');
-                
-                // Close the modal
                 closeLoyaltyModal();
             }
         }
-
-
 
         function confirmLoyaltyRegistration(cardNumber) {
             alert(`Thank you for registering! Your Loyalty Card Number is: ${cardNumber}. Please send your payment receipt to complete the registration. You'll receive your physical card within 3-5 business days.`);
@@ -1448,7 +1704,6 @@ Please process this loyalty card registration. Customer will send payment receip
                         </div>
                         
                         <div class="space-y-6">
-                            <!-- GCash Payment -->
                             <div class="border-2 border-blue-200 rounded-lg p-4 hover:border-blue-400 transition-colors">
                                 <div class="flex items-center space-x-3 mb-3">
                                     <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -1466,7 +1721,6 @@ Please process this loyalty card registration. Customer will send payment receip
                                 </div>
                             </div>
 
-                            <!-- BPI Payment -->
                             <div class="border-2 border-red-200 rounded-lg p-4 hover:border-red-400 transition-colors">
                                 <div class="flex items-center space-x-3 mb-3">
                                     <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center">
@@ -1526,10 +1780,8 @@ Please process this loyalty card registration. Customer will send payment receip
                 return;
             }
 
-            // Generate order number
             const orderNumber = 'JMB' + Date.now().toString().slice(-6);
             
-            // Create detailed order message
             let orderDetails = '';
             cart.forEach((item, index) => {
                 orderDetails += `${index + 1}. ${item.name} - ₱${item.price} x ${item.quantity} = ₱${(item.price * item.quantity).toLocaleString()}\n`;
@@ -1555,22 +1807,17 @@ Please provide your contact details and delivery address. Send payment receipt a
 
 #JMBPrintingServices #Order #PrintingServices`;
 
-            // Open Facebook page
             const facebookUrl = `https://web.facebook.com/profile.php?id=`;
             
-            // Show confirmation dialog
             if (confirm(`Your order will be sent to our Facebook page.\nOrder Number: ${orderNumber}\nTotal: ₱${total.toLocaleString()}\n\nClick OK to continue to Facebook.`)) {
-                // Copy message to clipboard
                 navigator.clipboard.writeText(message).then(() => {
                     alert('Order details copied to clipboard! You can paste this message on our Facebook page.');
                 }).catch(() => {
                     console.log('Clipboard API not available');
                 });
                 
-                // Open Facebook page
                 window.open(facebookUrl, '_blank');
                 
-                // Clear cart and close modals
                 cart = [];
                 updateCartDisplay();
                 toggleCart();
@@ -1585,10 +1832,6 @@ Please provide your contact details and delivery address. Send payment receipt a
             toggleCart();
             closePaymentModal();
         }
-
-
-
-
 
         function generateCalendar() {
             const calendar = document.getElementById('calendar');
@@ -1609,116 +1852,4 @@ Please provide your contact details and delivery address. Send payment receipt a
                     <div class="font-semibold p-2">Wed</div>
                     <div class="font-semibold p-2">Thu</div>
                     <div class="font-semibold p-2">Fri</div>
-                    <div class="font-semibold p-2">Sat</div>
-            `;
-            
-            // Empty cells for days before the first day of the month
-            for (let i = 0; i < firstDay; i++) {
-                calendarHTML += '<div class="p-2"></div>';
-            }
-            
-            // Days of the month
-            for (let day = 1; day <= daysInMonth; day++) {
-                const isToday = new Date().getDate() === day && 
-                               new Date().getMonth() === currentMonth && 
-                               new Date().getFullYear() === currentYear;
-                
-                calendarHTML += `<div class="p-2 ${isToday ? 'bg-blue-500 text-white rounded-lg' : 'hover:bg-gray-100 rounded-lg'}">${day}</div>`;
-            }
-            
-            calendarHTML += '</div>';
-            calendar.innerHTML = calendarHTML;
-        }
-
-        function previousMonth() {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            generateCalendar();
-        }
-
-        function nextMonth() {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            generateCalendar();
-        }
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const searchResults = document.getElementById('searchResults');
-            const resultsContent = document.getElementById('resultsContent');
-            const query = searchInput.value.toLowerCase().trim();
-            
-            if (query === '') {
-                searchResults.classList.add('hidden');
-                return;
-            }
-            
-            const services = [
-                { name: 'ID Rush Services', category: 'JMB Printing Services', keywords: ['id', 'rush', 'printing', 'identification'] },
-                { name: 'Photo Print', category: 'JMB Printing Services', keywords: ['photo', 'print', 'pictures', 'images'] },
-                { name: 'Document Printing', category: 'JMB Printing Services', keywords: ['document', 'a4', 'paper', 'printing', 'colored', 'black', 'white'] },
-                { name: 'Lamination', category: 'JMB Printing Services', keywords: ['laminate', 'protection', 'plastic'] },
-                { name: 'Book Binding', category: 'JMB Printing Services', keywords: ['book', 'binding', 'booklet'] },
-                { name: 'Portrait Photography', category: 'Jorenz Melo Balbuena Studio', keywords: ['portrait', 'photography', 'photos', 'studio'] },
-                { name: 'Event Photography', category: 'Jorenz Melo Balbuena Studio', keywords: ['event', 'photography', 'wedding', 'celebration'] },
-                { name: 'Video Production', category: 'Jorenz Melo Balbuena Studio', keywords: ['video', 'production', 'filming', 'editing'] },
-                { name: 'Logo Design', category: 'Jorenz Melo Balbuena Studio', keywords: ['logo', 'design', 'branding', 'graphics'] }
-            ];
-            
-            const matches = services.filter(service => 
-                service.name.toLowerCase().includes(query) ||
-                service.category.toLowerCase().includes(query) ||
-                service.keywords.some(keyword => keyword.includes(query))
-            );
-            
-            if (matches.length > 0) {
-                resultsContent.innerHTML = matches.map(match => 
-                    `<div class="py-2 border-b border-blue-200 last:border-b-0">
-                        <strong>${match.name}</strong> - ${match.category}
-                    </div>`
-                ).join('');
-            } else {
-                resultsContent.innerHTML = '<div class="py-2">No services found matching your search.</div>';
-            }
-            
-            searchResults.classList.remove('hidden');
-        }
-
-        // Allow search on Enter key
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-
-        // Navigation functions
-        function scrollToServices() {
-            document.querySelector('#searchInput').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function scrollToContact() {
-            document.querySelector('footer').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function scrollToPrinting() {
-            document.querySelector('section:nth-of-type(3)').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function scrollToStudio() {
-            document.querySelector('section:nth-of-type(4)').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Initialize
-        updateTime();
-        setInterval(updateTime, 1000);
-        generateCalendar();
-        updateCartDisplay();
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9683e747613591bd',t:'MTc1NDAzNjI5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'968523f96182445e',t:'MTc1NDA0OTI2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
