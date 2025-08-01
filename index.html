@@ -1175,9 +1175,10 @@
 
         function showAppointmentBooking() {
             const appointmentModal = document.createElement('div');
+            appointmentModal.id = 'appointmentModal';
             appointmentModal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
             appointmentModal.innerHTML = `
-                <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-96 overflow-y-auto">
+                <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
                     <div class="p-6 border-b">
                         <div class="flex justify-between items-center">
                             <h3 class="text-2xl font-bold text-gray-800">Book an Appointment</h3>
@@ -1194,7 +1195,7 @@
                             <div>
                                 <h4 class="text-lg font-semibold text-gray-800 mb-4">Select Service</h4>
                                 <div class="space-y-3">
-                                    <div class="border-2 border-blue-200 rounded-lg p-3 hover:border-blue-400 cursor-pointer" onclick="selectService('printing')">
+                                    <div id="service-printing" class="service-card border-2 border-blue-200 rounded-lg p-3 hover:border-blue-400 cursor-pointer transition-all" onclick="selectService('printing', this)">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1207,7 +1208,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-2 border-purple-200 rounded-lg p-3 hover:border-purple-400 cursor-pointer" onclick="selectService('photography')">
+                                    <div id="service-photography" class="service-card border-2 border-purple-200 rounded-lg p-3 hover:border-purple-400 cursor-pointer transition-all" onclick="selectService('photography', this)">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1221,7 +1222,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-2 border-red-200 rounded-lg p-3 hover:border-red-400 cursor-pointer" onclick="selectService('video')">
+                                    <div id="service-video" class="service-card border-2 border-red-200 rounded-lg p-3 hover:border-red-400 cursor-pointer transition-all" onclick="selectService('video', this)">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1234,7 +1235,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-2 border-green-200 rounded-lg p-3 hover:border-green-400 cursor-pointer" onclick="selectService('design')">
+                                    <div id="service-design" class="service-card border-2 border-green-200 rounded-lg p-3 hover:border-green-400 cursor-pointer transition-all" onclick="selectService('design', this)">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1307,16 +1308,16 @@
                         </div>
 
                         <div class="mt-6 flex space-x-3">
-                            <button onclick="submitAppointmentToFacebook()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2">
+                            <button onclick="submitAppointmentToFacebook()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-colors">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                                 </svg>
                                 <span>Submit to Facebook</span>
                             </button>
-                            <button onclick="processAppointment()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold">
+                            <button onclick="processAppointment()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
                                 Book Appointment
                             </button>
-                            <button onclick="closeAppointmentModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-3 px-6 rounded-lg font-semibold">
+                            <button onclick="closeAppointmentModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-3 px-6 rounded-lg font-semibold transition-colors">
                                 Cancel
                             </button>
                         </div>
@@ -1325,73 +1326,85 @@
             `;
             document.body.appendChild(appointmentModal);
             
-            // Set minimum date to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('appointmentDate').min = today;
+            // Set minimum date to today and maximum to 3 months ahead
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setMonth(maxDate.getMonth() + 3);
+            
+            const appointmentDateInput = document.getElementById('appointmentDate');
+            appointmentDateInput.min = today.toISOString().split('T')[0];
+            appointmentDateInput.max = maxDate.toISOString().split('T')[0];
+            
+            // Initialize selected service
+            window.selectedService = null;
         }
 
         function closeAppointmentModal() {
-            const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50.z-50');
+            const modal = document.getElementById('appointmentModal');
             if (modal) {
                 modal.remove();
             }
+            // Reset selected service
+            window.selectedService = null;
         }
 
-        function selectService(serviceType) {
+        function selectService(serviceType, element) {
             // Remove previous selections
-            document.querySelectorAll('.border-4').forEach(el => {
-                el.classList.remove('border-4');
-                el.classList.add('border-2');
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('border-4', 'bg-blue-50', 'bg-purple-50', 'bg-red-50', 'bg-green-50');
+                card.classList.add('border-2');
             });
             
             // Add selection to clicked service
-            event.currentTarget.classList.remove('border-2');
-            event.currentTarget.classList.add('border-4');
+            element.classList.remove('border-2');
+            element.classList.add('border-4');
+            
+            // Add background color based on service type
+            const colorMap = {
+                'printing': 'bg-blue-50',
+                'photography': 'bg-purple-50',
+                'video': 'bg-red-50',
+                'design': 'bg-green-50'
+            };
+            element.classList.add(colorMap[serviceType]);
             
             // Store selected service
             window.selectedService = serviceType;
         }
 
         function processAppointment() {
-            const name = document.getElementById('appointmentName').value;
-            const phone = document.getElementById('appointmentPhone').value;
-            const email = document.getElementById('appointmentEmail').value;
+            const name = document.getElementById('appointmentName').value.trim();
+            const phone = document.getElementById('appointmentPhone').value.trim();
+            const email = document.getElementById('appointmentEmail').value.trim();
             const date = document.getElementById('appointmentDate').value;
             const time = document.getElementById('appointmentTime').value;
-            const details = document.getElementById('appointmentDetails').value;
+            const details = document.getElementById('appointmentDetails').value.trim();
 
+            // Validate required fields
             if (!name || !phone || !date || !time) {
-                alert('Please fill in all required fields (Name, Phone, Date, Time).');
+                alert('Please fill in all required fields:\n• Full Name\n• Phone Number\n• Preferred Date\n• Preferred Time');
                 return;
             }
 
             if (!window.selectedService) {
-                alert('Please select a service type.');
+                alert('Please select a service type from the options on the left.');
                 return;
             }
 
-            const appointmentNumber = 'APT' + Date.now().toString().slice(-6);
-            
-            alert(`Appointment booked successfully!\n\nAppointment Number: ${appointmentNumber}\nDate: ${date}\nTime: ${time}\n\nWe will contact you within 24 hours to confirm your appointment. Please save your appointment number for reference.`);
-            
-            closeAppointmentModal();
-        }
-
-        function submitAppointmentToFacebook() {
-            const name = document.getElementById('appointmentName').value;
-            const phone = document.getElementById('appointmentPhone').value;
-            const email = document.getElementById('appointmentEmail').value;
-            const date = document.getElementById('appointmentDate').value;
-            const time = document.getElementById('appointmentTime').value;
-            const details = document.getElementById('appointmentDetails').value;
-
-            if (!name || !phone || !date || !time) {
-                alert('Please fill in all required fields before submitting to Facebook.');
+            // Validate phone number format
+            const phoneRegex = /^09\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('Please enter a valid Philippine mobile number (e.g., 09123456789)');
                 return;
             }
 
-            if (!window.selectedService) {
-                alert('Please select a service type.');
+            // Validate date is not in the past
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                alert('Please select a date that is today or in the future.');
                 return;
             }
 
@@ -1403,44 +1416,188 @@
                 'design': 'Design Services'
             };
 
-            const message = `📅 APPOINTMENT BOOKING REQUEST
+            // Format date for display
+            const formattedDate = new Date(date).toLocaleDateString('en-PH', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Format time for display
+            const timeOptions = {
+                '08:00': '8:00 AM',
+                '09:00': '9:00 AM',
+                '10:00': '10:00 AM',
+                '11:00': '11:00 AM',
+                '13:00': '1:00 PM',
+                '14:00': '2:00 PM',
+                '15:00': '3:00 PM',
+                '16:00': '4:00 PM',
+                '17:00': '5:00 PM',
+                '18:00': '6:00 PM',
+                '19:00': '7:00 PM'
+            };
+            
+            const successMessage = `✅ APPOINTMENT BOOKED SUCCESSFULLY!
 
 📋 APPOINTMENT DETAILS:
-Appointment Number: ${appointmentNumber}
-Service Type: ${serviceNames[window.selectedService]}
-Date: ${date}
-Time: ${time}
+• Appointment Number: ${appointmentNumber}
+• Service: ${serviceNames[window.selectedService]}
+• Date: ${formattedDate}
+• Time: ${timeOptions[time]}
+• Customer: ${name}
+• Phone: ${phone}
+
+📞 NEXT STEPS:
+1. Save your appointment number: ${appointmentNumber}
+2. We will contact you within 24 hours to confirm
+3. Bring valid ID and required documents
+4. Arrive 10 minutes before your scheduled time
+
+📱 Contact us: 09931109148
+📧 Email: jmbalbuenastudioproduction@gmail.com
+
+Thank you for choosing JMB Printing Services!`;
+
+            alert(successMessage);
+            closeAppointmentModal();
+        }
+
+        function submitAppointmentToFacebook() {
+            const name = document.getElementById('appointmentName').value.trim();
+            const phone = document.getElementById('appointmentPhone').value.trim();
+            const email = document.getElementById('appointmentEmail').value.trim();
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const details = document.getElementById('appointmentDetails').value.trim();
+
+            // Validate required fields
+            if (!name || !phone || !date || !time) {
+                alert('Please fill in all required fields:\n• Full Name\n• Phone Number\n• Preferred Date\n• Preferred Time');
+                return;
+            }
+
+            if (!window.selectedService) {
+                alert('Please select a service type from the options on the left.');
+                return;
+            }
+
+            // Validate phone number format
+            const phoneRegex = /^09\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('Please enter a valid Philippine mobile number (e.g., 09123456789)');
+                return;
+            }
+
+            // Validate date is not in the past
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                alert('Please select a date that is today or in the future.');
+                return;
+            }
+
+            const appointmentNumber = 'APT' + Date.now().toString().slice(-6);
+            const serviceNames = {
+                'printing': 'Printing Services',
+                'photography': 'Photography',
+                'video': 'Video Production',
+                'design': 'Design Services'
+            };
+
+            // Format date for display
+            const formattedDate = new Date(date).toLocaleDateString('en-PH', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Format time for display
+            const timeOptions = {
+                '08:00': '8:00 AM',
+                '09:00': '9:00 AM',
+                '10:00': '10:00 AM',
+                '11:00': '11:00 AM',
+                '13:00': '1:00 PM',
+                '14:00': '2:00 PM',
+                '15:00': '3:00 PM',
+                '16:00': '4:00 PM',
+                '17:00': '5:00 PM',
+                '18:00': '6:00 PM',
+                '19:00': '7:00 PM'
+            };
+
+            const message = `📅 APPOINTMENT BOOKING REQUEST - JMB PRINTING SERVICES
+
+🆔 APPOINTMENT DETAILS:
+• Appointment Number: ${appointmentNumber}
+• Service Type: ${serviceNames[window.selectedService]}
+• Date: ${formattedDate}
+• Time: ${timeOptions[time]}
+• Status: PENDING CONFIRMATION
 
 👤 CUSTOMER INFORMATION:
-Name: ${name}
-Phone: ${phone}
-Email: ${email || 'Not provided'}
+• Name: ${name}
+• Phone: ${phone}
+• Email: ${email || 'Not provided'}
 
 📝 SERVICE DETAILS:
 ${details || 'No additional details provided'}
 
-📞 CONTACT INFORMATION:
-📱 Phone: 09931109148
-📧 Email: jmbalbuenastudioproduction@gmail.com
-📍 Location: Hi-way, Balitoc, Calatagan, Batangas
+📞 BUSINESS CONTACT:
+• Phone: 09931109148 (Dito Sim)
+• Email: jmbalbuenastudioproduction@gmail.com
+• Location: Hi-way, Balitoc, Calatagan, Batangas, 4215
 
 ⏰ BUSINESS HOURS:
 Monday to Sunday: 8:00 AM - 8:00 PM
 
-Please confirm this appointment and provide any additional requirements or pricing information.
+📋 NEXT STEPS:
+1. We will confirm your appointment within 24 hours
+2. Please bring valid ID and required documents
+3. Arrive 10 minutes before your scheduled time
+4. For cancellations, notify us 24 hours in advance
 
-#JMBPrintingServices #Appointment #${serviceNames[window.selectedService].replace(' ', '')}`;
+#JMBPrintingServices #AppointmentBooking #${serviceNames[window.selectedService].replace(/\s+/g, '')} #Batangas`;
 
-            if (confirm(`Your appointment request will be sent to our Facebook page.\nAppointment Number: ${appointmentNumber}\nService: ${serviceNames[window.selectedService]}\nDate: ${date} at ${time}\n\nClick OK to continue to Facebook.`)) {
-                navigator.clipboard.writeText(message).then(() => {
-                    alert('Appointment details copied to clipboard! You can paste this message on our Facebook page.');
-                }).catch(() => {
-                    console.log('Clipboard API not available');
-                });
+            const confirmMessage = `🎯 APPOINTMENT SUMMARY:
+
+📋 Appointment Number: ${appointmentNumber}
+🔧 Service: ${serviceNames[window.selectedService]}
+📅 Date: ${formattedDate}
+⏰ Time: ${timeOptions[time]}
+👤 Name: ${name}
+📱 Phone: ${phone}
+
+Your appointment request will be sent to our Facebook page for confirmation.
+
+Click OK to continue to Facebook and submit your appointment.`;
+
+            if (confirm(confirmMessage)) {
+                // Try to copy to clipboard
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(message).then(() => {
+                        alert('✅ Appointment details copied to clipboard!\n\nYou can now paste this message on our Facebook page.');
+                    }).catch(() => {
+                        alert('📋 Please copy the appointment details manually from the Facebook page.');
+                    });
+                } else {
+                    alert('📋 Your appointment details will be available to copy on the Facebook page.');
+                }
                 
-                const facebookUrl = `https://web.facebook.com/profile.php?id=`;
+                // Open Facebook page
+                const facebookUrl = `https://web.facebook.com/profile.php?id=100063483288777`;
                 window.open(facebookUrl, '_blank');
-                closeAppointmentModal();
+                
+                // Show success message and close modal
+                setTimeout(() => {
+                    alert(`✅ Appointment request submitted successfully!\n\n📋 Your appointment number is: ${appointmentNumber}\n\nPlease save this number for your reference. We will contact you within 24 hours to confirm your appointment.`);
+                    closeAppointmentModal();
+                }, 1000);
             }
         }
 
@@ -1852,4 +2009,4 @@ Please provide your contact details and delivery address. Send payment receipt a
                     <div class="font-semibold p-2">Wed</div>
                     <div class="font-semibold p-2">Thu</div>
                     <div class="font-semibold p-2">Fri</div>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'968523f96182445e',t:'MTc1NDA0OTI2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96852b8b2575a05d',t:'MTc1NDA0OTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
