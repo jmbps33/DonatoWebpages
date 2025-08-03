@@ -1,76 +1,43 @@
-
 # DONATO WEBPAGE
 
-Welcome to the **DONATO WEBPAGE** repository! This project is a fully responsive, interactive, and beautifully styled website built using Tailwind CSS, with support for professional printing and creative media services in Batangas, Philippines.
+A responsive website combining **JMB Printing Services** and **Jorenz Melo Balbuena Studio Production**.
 
-## 🔗 Live Features
-- 🕒 Real-time Philippines Standard Time (PST) display
-- 🛒 Interactive shopping cart for printing and media services
-- 💳 Loyalty card registration prompt
-- 📊 Dynamic calendar with Philippine holidays
-- 🔍 Search bar with service lookup
-- 📢 Special student promos (P1SO PR1NT)
-- 🖨️ JMB PRINTING SERVICES portfolio with pricing
-- 🎥 JMB STUDIO PRODUCTION portfolio with pricing
-- 📍 Local business contact & registration info
-- 📱 Mobile responsive design
+## 🖼 Features
 
----
+- Tailwind CSS design (via CDN)
+- JMB and Studio sections
+- Shopping cart system
+- Appointment booking
+- Real-time Philippine Standard Time clock
+- Interactive calendar with Philippine holidays
+- Dynamic gallery with filtering and modal previews
+- Responsive layout
 
-## 🧩 Technologies Used
-- **HTML5**
-- **Tailwind CSS** (via CDN)
-- **JavaScript** (custom for interactivity like clock, cart, and calendar)
-- **Google Fonts** (Inter & Dancing Script)
+## 🚀 Getting Started
 
----
+### Requirements
+- Modern web browser (Chrome, Firefox, etc.)
+- Web server if loading local image assets (`file:///` URLs may not display properly)
 
-## 📁 Project Structure
-```
-DONATO_WEBPAGE/
-├── index.html          # Main HTML file (this file)
-├── README.md           # Project overview and instructions
-├── assets/
-│   ├── images/         # (You should place external assets here if used)
-│   └── scripts.js      # (Optional: move inline JS into separate file)
-```
+### Setup
+1. Clone or download this repository.
+2. Open `online_viewer_net.htm` in your browser.
+3. Update local image paths (`D:/New folder/...`) to relative or hosted URLs.
 
----
+### CDN Dependencies
+- Tailwind CSS:  
+  `https://cdn.tailwindcss.com`
+- Google Fonts:  
+  `Inter` and `Dancing Script`
 
-## 🚀 How to Use
-1. Download or clone this repository.
-2. Open `index.html` in any modern browser.
-3. Interact with the buttons, search bar, calendar, and portfolio sections.
+### 📂 Folder Structure
 
----
-
-## 📌 Key Sections
-- **Header** with real-time clock, logo, and cart/loyalty actions.
-- **Hero Section** welcoming users with action buttons.
-- **Featured Services** for both:
-  - 🖨️ *JMB PRINTING SERVICES*
-  - 🎬 *STUDIO PRODUCTION*
-- **P1SO PR1NT** poster for student printing promo.
-- **Admin Profile** and **Mission/Vision** statements.
-- **Business Permits & Partners** included for credibility.
-- **Full Calendar** with Philippine Holidays 2025.
-- **Portfolio Showcase** for design/media samples.
-
----
-
-## 📬 Contact Information
-**Admin & Founder**: Jorenz Melo Balbuena  
-📞 `09931109148`  
-📧 `jmbprintingservices12@gmail.com`  
-📍 Hi-way, Balitoc, Calatagan, Batangas, 4215  
-🌐 [Facebook Page](https://web.facebook.com/profile.php?id=)
-
----
-
-## 📜 License
-This project is proprietary. Please contact the admin for usage permissions.
-
----
-
-## 🏷️ Credits
-Design and development by **JMB Studio Production** and **JMB Printing Services**.
+```plaintext
+project/
+├── index.html (DONATO WEBPAGE)
+├── scripts.js (JavaScript logic - inline or extracted)
+└── assets/
+    └── images/
+        ├── JMB Logo
+        ├── Studio Logo
+        └── Gallery Samples
